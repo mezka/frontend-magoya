@@ -24,10 +24,12 @@ const TransactionApi = {
                 return -1;
             });
 
-            return transactions;
+            const balance = transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0);
+
+            return {balance, transactions};
         } catch (error){
             console.log(error);
-            return  [];
+            return  {balance: undefined, transactions: []};
         }
     },
 

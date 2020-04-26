@@ -12,21 +12,14 @@ import TransactionApi from '../utils/TransactionApi';
 import type { Transaction } from '../types';
 
 interface Props {
-    transactions: Array<Transaction>,
+    balance: Number,
+    transactions: Array<Transaction>
 }
 
 class Index extends React.Component<Props> {
 
-    state = {
-        balance: null,
-    };
-    
     constructor(props){
         super(props);
-    }
-
-    componentDidMount(){
-        this.setState({balance: this.props.transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0)});
     }
 
     render(){
@@ -43,7 +36,7 @@ class Index extends React.Component<Props> {
                     <Col xs="auto">
                         <Card>
                             <Card.Body>
-                                ${this.state.balance}
+                                ${this.props.balance}
                             </Card.Body>
                         </Card>
                     </Col>
@@ -60,8 +53,8 @@ class Index extends React.Component<Props> {
 
 export async function getServerSideProps({ req } : NextPageContext){
 
-    const transactions = await TransactionApi.getTransactions();
-    return { props: { transactions } }
+    const data = await TransactionApi.getTransactions();
+    return { props: { ...data } }
 }
 
 export default Index;
