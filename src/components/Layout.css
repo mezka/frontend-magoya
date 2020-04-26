@@ -1,0 +1,18 @@
+:root{
+    --bg-dark: #343A40;
+    --navbar-height: 56px;
+    --footer-height: 30px;
+}
+
+.footer{
+    height: var(--footer-height);
+    color: white;
+    background-color: var(--bg-dark);
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 2px;
+}
+
+.content {
+    min-height: calc(100vh - var(--footer-height) - var(--navbar-height));
+}
