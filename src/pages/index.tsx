@@ -1,52 +1,60 @@
 import React from 'react';
 import { NextPageContext } from 'next'
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import Navbar from 'react-bootstrap/Navbar';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Layout from '../components/Layout';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import TransactionTable from '../components/TransactionTable';
 import TransactionApi from '../utils/TransactionApi';
-
-interface Transaction {
-    date: string,
-    description: string,
-    amount: number,
-    id: string
-};
+import type { Transaction } from '../types';
 
 interface Props {
     transactions: Array<Transaction>,
 }
 
 class Index extends React.Component<Props> {
+
+    state = {
+        balance: null,
+    };
     
     constructor(props){
         super(props);
-        console.log(props);
+    }
+
+    componentDidMount(){
+        this.setState({balance: this.props.transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0)});
     }
 
     render(){
-        return (<div className="container">
-                    <Navbar bg="dark">
-                        <Navbar.Brand href="#home">
-                        <img
-                            src="/logo.png"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                            alt="Magoya Logo"
-                        />
-                        </Navbar.Brand>
-                    </Navbar>
-                    <Jumbotron>
-                        <h1 className="header text-center">Magoya Frontend Dev Test</h1>
-                    </Jumbotron>
+        return (
+            <Layout>
+                <Jumbotron>
+                    <h1 className="header text-center">Magoya Frontend Dev Test</h1>
+                </Jumbotron>
 
-                    <TransactionTable transactions={this.props.transactions}></TransactionTable>
-                    <Link href="/transactions/new">
-                        <Button variant="secondary">New Transaction</Button>
-                    </Link>
-                </div>);
+                <Row className="my-2 d-flex justify-content-center">
+                    <Col xs="auto" className="d-flex align-items-center">
+                        <h2>Balance:</h2>
+                    </Col>
+                    <Col xs="auto">
+                        <Card>
+                            <Card.Body>
+                                ${this.state.balance}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+        
+                <TransactionTable transactions={this.props.transactions}></TransactionTable>
+                <Link href="/transactions/new">
+                    <Button className="mb-3" variant="primary">New Transaction</Button>
+                </Link>
+            </Layout> 
+        );
     }
 }
 
