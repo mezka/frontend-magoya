@@ -21,7 +21,7 @@ class NewTransaction extends React.Component{
 
     state = {
         description: '',
-        amount: 0,
+        amount: 1,
         transactionType: TransactionType.Deposit
     };
 
