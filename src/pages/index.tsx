@@ -10,14 +10,15 @@ import Link from 'next/link';
 import TransactionTable from '../components/TransactionTable';
 import TransactionApi from '../utils/TransactionApi';
 import Router from 'next/router';
+import AppContext from '../components/AppContext';
 import type { Transaction } from '../types';
 
 interface Props {
-    balance: Number,
-    transactions: Array<Transaction>
+    transactions: Array<Transaction>,
 }
 
 class Index extends React.Component<Props> {
+    static contextType = AppContext;
 
     constructor(props){
         super(props);
@@ -27,6 +28,14 @@ class Index extends React.Component<Props> {
         TransactionApi.deleteTransaction(id);
         Router.push('/');
     }
+    
+    componentDidMount(){
+        const context = this.context;
+
+        console.log(context);
+        context.setBalance(this.props.transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0))      
+    }
+
 
     render(){
         return (
@@ -41,9 +50,11 @@ class Index extends React.Component<Props> {
                     </Col>
                     <Col xs="auto">
                         <Card>
-                            <Card.Body>
-                                ${this.props.balance}
-                            </Card.Body>
+                                <Card.Body>
+                                    <AppContext.Consumer>
+                                        {context => context.balance}
+                                    </AppContext.Consumer>
+                                </Card.Body>
                         </Card>
                     </Col>
                 </Row>
@@ -59,8 +70,8 @@ class Index extends React.Component<Props> {
 
 export async function getServerSideProps({ req } : NextPageContext){
 
-    const data = await TransactionApi.getTransactions();
-    return { props: { ...data } }
+    const transactions = await TransactionApi.getTransactions();
+    return { props: { transactions } }
 }
 
 export default Index;

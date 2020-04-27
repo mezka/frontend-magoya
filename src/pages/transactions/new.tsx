@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import React from 'react';
 import Router from 'next/router';
+import AppContext from '../../components/AppContext';
 import TransactionApi from '../../utils/TransactionApi';
 
 //Must be strings
@@ -15,6 +16,8 @@ enum TransactionType {
 
 
 class NewTransaction extends React.Component{
+
+    static contextType = AppContext;
 
     state = {
         description: '',
@@ -29,7 +32,13 @@ class NewTransaction extends React.Component{
     handleSubmit = async (event) => {
         event.preventDefault();
 
+        const context = this.context;
         let {transactionType, ...data } = this.state;
+
+        if(TransactionType.Withdraw && data.amount > context.balance){
+            alert('You cant withdraw more than you currently have in your account');
+            return;
+        }
 
         data.amount = transactionType === TransactionType.Withdraw? - data.amount : data.amount;
 

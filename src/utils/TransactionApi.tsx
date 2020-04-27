@@ -24,12 +24,10 @@ const TransactionApi = {
                 return -1;
             });
 
-            const balance = transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0);
-
-            return {balance, transactions};
+            return transactions;
         } catch (error){
             console.log(error);
-            return  {balance: undefined, transactions: []};
+            return  [];
         }
     },
 
@@ -46,7 +44,6 @@ const TransactionApi = {
             const res = await fetch('/api/transactions', fetchInit);
             return await res.json();
         } catch (error) {
-            console.log(error);
             return null;
         }
     },
@@ -63,7 +60,6 @@ const TransactionApi = {
             const res = await fetch(`/api/transactions/${id}`, fetchInit);
             return;
         } catch (error) {
-            console.log('hit2');
             console.log(error);
             return null;
         }
