@@ -36,6 +36,16 @@ class Index extends React.Component<Props> {
         context.setBalance(this.props.transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0))      
     }
 
+    componentDidUpdate(prevProps){
+
+        const context = this.context;
+        const balanceCandidate = this.props.transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0);
+
+        if(context.balance !== balanceCandidate){
+            context.setBalance(balanceCandidate);
+        }
+    }
+
 
     render(){
         return (
