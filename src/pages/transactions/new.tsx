@@ -35,7 +35,7 @@ class NewTransaction extends React.Component{
         const context = this.context;
         let {transactionType, ...data } = this.state;
 
-        if(TransactionType.Withdraw && data.amount > context.balance){
+        if(transactionType === TransactionType.Withdraw && data.amount > context.balance){
             alert('You cant withdraw more than you currently have in your account');
             return;
         }
