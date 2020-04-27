@@ -71,7 +71,10 @@ class Index extends React.Component<IndexProps> {
         
                 <TransactionTable transactions={this.props.transactions} deleteTransaction={this.deleteTransaction}></TransactionTable>
                 <Link href="/transactions/new">
-                    <Button className="mb-3" variant="primary">New Transaction</Button>
+                    <Button className="mb-3 mr-2" variant="primary">New Transaction</Button>
+                </Link>
+                <Link href="/">
+                    <Button className="mb-3" variant="secondary">Update Transactions</Button>
                 </Link>
             </Layout> 
         );
