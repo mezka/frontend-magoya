@@ -8,12 +8,11 @@ import Router from 'next/router';
 import AppContext from '../../components/AppContext';
 import TransactionApi from '../../utils/TransactionApi';
 
-//Must be strings
+//Must be strings for radio value property
 enum TransactionType {
     Deposit = "DEPOSIT",
     Withdraw = "WITHDRAW"
 };
-
 
 class NewTransaction extends React.Component{
 
@@ -33,7 +32,7 @@ class NewTransaction extends React.Component{
         event.preventDefault();
 
         const context = this.context;
-        let {transactionType, ...data } = this.state;
+        const {transactionType, ...data } = this.state;
 
         if(transactionType === TransactionType.Withdraw && data.amount > context.balance){
             alert('You cant withdraw more than you currently have in your account');

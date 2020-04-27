@@ -13,11 +13,11 @@ import Router from 'next/router';
 import AppContext from '../components/AppContext';
 import type { Transaction } from '../types';
 
-interface Props {
+interface IndexProps {
     transactions: Array<Transaction>,
 }
 
-class Index extends React.Component<Props> {
+class Index extends React.Component<IndexProps> {
     static contextType = AppContext;
 
     constructor(props){
@@ -46,7 +46,6 @@ class Index extends React.Component<Props> {
             }
         }
     }
-
 
     render(){
         return (

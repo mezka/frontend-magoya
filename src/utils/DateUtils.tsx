@@ -1,3 +1,5 @@
+// Snippet from https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
+
 export const formatDate = (date) => {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),

@@ -1,7 +1,14 @@
 import Table from 'react-bootstrap/Table';
 import TransactionTableRow from './TransactionTableRow';
+import { Transaction } from '../types';
 
-export default (props) => {
+interface TransactionTableProps{
+    transactions: Array<Transaction>,
+    deleteTransaction: Function
+}
+
+
+export default (props: TransactionTableProps) => {
 
     const transactions = props.transactions.map((transaction) => {
 

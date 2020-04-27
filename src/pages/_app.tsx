@@ -1,14 +1,9 @@
 import 'isomorphic-unfetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import App from 'next/app'
+import App, { AppProps } from 'next/app'
 import AppContext from '../components/AppContext';
- 
-interface MyAppProps{
-  Component: React.Component,
-  pageProps: any
-}
 
-class MyApp extends App {
+class MyApp extends App <AppProps>{
 
   state = {
     balance: null

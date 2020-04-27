@@ -1,4 +1,5 @@
 import React from 'react';
+
 interface TransactionTableRowProps{
     id: string,
     date: string,
@@ -22,9 +23,9 @@ class TransactionTableRow extends React.Component <TransactionTableRowProps>{
         let colorClass = '';
 
         if(this.props.amount > 0){
-            colorClass += 'text-success'
+            colorClass = 'text-success'
         } else {
-            colorClass += 'text-danger'
+            colorClass = 'text-danger'
         }
 
         return (

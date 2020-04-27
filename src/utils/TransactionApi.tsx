@@ -25,12 +25,10 @@ const TransactionApi = {
                 return -1;
             });
 
-            transactions = transactions.map(element => {
+            return transactions.map(element => {
                 element.date = formatDate(element.date);
                 return element;
             });
-
-            return transactions;
         } catch (error){
             console.log(error);
             return  [];
