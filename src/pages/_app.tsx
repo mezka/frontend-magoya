@@ -26,7 +26,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props
     return( 
       <AppContext.Provider value={{balance: this.state.balance, setBalance: this.setBalance}}>
-        <Component {...pageProps}/>);
+        <Component {...pageProps}/>
       </AppContext.Provider>
       )
   }
