@@ -1,5 +1,4 @@
 import React from 'react';
-
 interface TransactionTableRowProps{
     id: string,
     date: string,
@@ -20,12 +19,12 @@ class TransactionTableRow extends React.Component <TransactionTableRowProps>{
 
     render(){
 
-        let colorClass = null;
+        let colorClass = '';
 
         if(this.props.amount > 0){
-            colorClass = 'text-success'
+            colorClass += 'text-success'
         } else {
-            colorClass = 'text-danger'
+            colorClass += 'text-danger'
         }
 
         return (
@@ -34,8 +33,8 @@ class TransactionTableRow extends React.Component <TransactionTableRowProps>{
                 <td>{this.props.date}</td>
                 <td>{this.props.description}</td>
                 <td>{this.props.amount}</td>
-                <td className="d-flex justify-content-center">
-                    <button onClick={this.handleClick} type="button" className="close" aria-label="close">
+                <td>
+                    <button className="close d-block w-100 mx-auto" onClick={this.handleClick} type="button" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </td>
