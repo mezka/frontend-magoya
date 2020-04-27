@@ -63,7 +63,7 @@ class NewTransaction extends React.Component{
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formAmount">
                         <Form.Label>Transaction Amount</Form.Label>
-                        <Form.Control type="number" name="amount" value={this.state.amount} onChange={this.handleChange} placeholder="Enter amount" min="0" required/>
+                        <Form.Control type="number" name="amount" value={this.state.amount} onChange={this.handleChange} placeholder="Enter amount" min="1" required/>
                     </Form.Group>
                     <Form.Group controlId="formDescription">
                         <Form.Label>Transaction Description</Form.Label>
