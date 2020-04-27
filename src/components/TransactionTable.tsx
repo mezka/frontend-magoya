@@ -1,24 +1,12 @@
 import Table from 'react-bootstrap/Table';
+import TransactionTableRow from './TransactionTableRow';
 
 export default (props) => {
 
     const transactions = props.transactions.map((transaction) => {
 
-        let textColor = '';
-
-        if(transaction.amount > 0){
-            textColor = 'text-success';
-        } else {
-            textColor = 'text-danger'
-        }
-
         return (
-        <tr className={textColor} key={transaction.id}>
-            <th>{transaction.id}</th>
-            <td>{transaction.date}</td>
-            <td>{transaction.description}</td>
-            <td>{transaction.amount}</td>
-        </tr>
+            <TransactionTableRow key={transaction.id} {...transaction} deleteTransaction={props.deleteTransaction}></TransactionTableRow>
         );
     });
 
@@ -30,6 +18,7 @@ export default (props) => {
                     <th>Date</th>
                     <th>Description</th>
                     <th>Amount</th>
+                    <th>Delete?</th>
                 </tr>         
             </thead>
             <tbody>

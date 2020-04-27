@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import TransactionTable from '../components/TransactionTable';
 import TransactionApi from '../utils/TransactionApi';
+import Router from 'next/router';
 import type { Transaction } from '../types';
 
 interface Props {
@@ -20,6 +21,11 @@ class Index extends React.Component<Props> {
 
     constructor(props){
         super(props);
+    }
+
+    deleteTransaction(id){
+        TransactionApi.deleteTransaction(id);
+        Router.push('/');
     }
 
     render(){
@@ -42,7 +48,7 @@ class Index extends React.Component<Props> {
                     </Col>
                 </Row>
         
-                <TransactionTable transactions={this.props.transactions}></TransactionTable>
+                <TransactionTable transactions={this.props.transactions} deleteTransaction={this.deleteTransaction}></TransactionTable>
                 <Link href="/transactions/new">
                     <Button className="mb-3" variant="primary">New Transaction</Button>
                 </Link>

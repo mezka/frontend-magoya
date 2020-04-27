@@ -49,6 +49,24 @@ const TransactionApi = {
             console.log(error);
             return null;
         }
+    },
+
+    async deleteTransaction(id){
+        const fetchInit = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+
+        try{
+            const res = await fetch(`/api/transactions/${id}`, fetchInit);
+            return;
+        } catch (error) {
+            console.log('hit2');
+            console.log(error);
+            return null;
+        }
     }
 };
 
