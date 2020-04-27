@@ -1,4 +1,5 @@
 import type { TransactionValues } from '../types';
+import { formatDate } from './DateUtils';
 
 const TransactionApi = {
     async getTransactions(){
@@ -11,7 +12,7 @@ const TransactionApi = {
 
         try{
             const res = await fetch('http://localhost:3000/api/transactions', fetchInit);
-            const transactions = await res.json();
+            let transactions = await res.json();
 
             transactions.sort((elementA, elementB) => {
                 const dateA = new Date(elementA.date);
@@ -22,6 +23,11 @@ const TransactionApi = {
                 }
 
                 return -1;
+            });
+
+            transactions = transactions.map(element => {
+                element.date = formatDate(element.date);
+                return element;
             });
 
             return transactions;
