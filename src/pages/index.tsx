@@ -25,14 +25,14 @@ class Index extends React.Component<Props> {
     }
 
     deleteTransaction(id){
-        TransactionApi.deleteTransaction(id);
-        Router.push('/');
+        if(window.confirm('Are you sure you want to delete this transaction?')){
+            TransactionApi.deleteTransaction(id);
+            Router.push('/');
+        }
     }
     
     componentDidMount(){
         const context = this.context;
-
-        console.log(context);
         context.setBalance(this.props.transactions.reduce((acum, transaction) => {return acum + transaction.amount}, 0))      
     }
 
